@@ -12,14 +12,14 @@ def clear():
 # Approval Function (Exact Code as Requested)
 def approval():
     uuid = str(os.geteuid()) + "DS" + str(os.geteuid())
-    id = "KYZIN-SHARE-TOOL-" + "".join(uuid)
+    id = "WADE-SHARE-TOOL-" + "".join(uuid)
     clear()
     print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYou Need Approval To Use This Tool\033[1;37m")
     print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYour Key :\033[0;31m {id}")
     time.sleep(0.1)
     print("\033[0;37m──────────────────────────────────────────────────────────")
     try:
-        httpCaht = requests.get("https://github.com/Ubermanue/key.txtt/blob/main/key.txt").text
+        httpCaht = requests.get("https://github.com/axle-404/approval/blob/main/key.txt").text
         if id in httpCaht:
             print("\033[0;32m >> Your Key Has Been Approved !!!")
             time.sleep(1)
@@ -43,11 +43,11 @@ approval()
 def logo_menu():
     console = Console()
     banner = Panel(
-        "KYZIN SHARE TOOL FREE\n"
-        "OWNER: KYZIN\n"
+        "ARKIN SHARE TOOL FREE\n"
+        "OWNER: ARKIN\n"
         "TOOL TYPE: AUTO SHARE TOOL\n"
         "STATUS: PAID USERS ONLY\n",
-        title="KYZIN SHARE TOOL",
+        title="ARKIN SHARE TOOL",
         style="blue"
     )
     console.print(banner)
