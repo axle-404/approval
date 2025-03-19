@@ -19,7 +19,7 @@ def approval():
     time.sleep(0.1)
     print("\033[0;37m──────────────────────────────────────────────────────────")
     try:
-        httpCaht = requests.get("https://github.com/axle-404/approval/blob/main/approval").text
+        httpCaht = requests.get("https://github.com/axle-404/approval/blob/main/approval.txt").text
         if id in httpCaht:
             print("\033[0;32m >> Your Key Has Been Approved !!!")
             time.sleep(1)
@@ -28,7 +28,7 @@ def approval():
             time.sleep(0.1)
             input(" >> Click Enter To Send Your Key ")
             tks = "Hello%20Sir%20!%20Please%20Approve%20My%20Token%20The%20Token%20Is%20:" + id
-            os.system("xdg-open https://www.facebook.com/kyzinnot?" + tks)
+            os.system("xdg-open https://www.facebook.com/61573982738672" + tks)
             approval()
             time.sleep(1)
             exit()
