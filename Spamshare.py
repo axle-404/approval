@@ -1,93 +1,76 @@
-import asyncio
-import aiohttp
-import re
-from rich.console import Console
-from maxgradient import Gradient
-import sys
 import os
-os.system('clear')
-console = Console()
-config = {
-	'cookies': '',
-	'post': ''
-}
-def banner():
-	console.print(
-		Gradient(
-			"""
- $$$$$$\                                          
-$$  __$$\                                         
-$$ /  \__| $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\  
-$$ |$$$$\ $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$\ 
-$$ |\_$$ |$$ |  \__|$$$$$$$$ |$$$$$$$$ |$$ /  $$ |
-$$ |  $$ |$$ |      $$   ____|$$   ____|$$ |  $$ |
-\$$$$$$  |$$ |      \$$$$$$$\ \$$$$$$$\ \$$$$$$$ |
- \______/ \__|       \_______| \_______| \____$$ |
-                                        $$\   $$ |
-                                        \$$$$$$  |
-                                         \______/ 
-			""",
-			colors=['blue','purple','blue']
-		)
-	)
-banner()
-config['cookies'] = input("\033[0mCOOKIE : \033[92m")
-config['post'] = input("\033[0mPOST LINK : \033[92m")
-share_count = int(input("\033[0mSHARE COUNT : \033[92m"))
-if not config['post'].startswith('https://'):
-	console.print(Gradient("Invalid post link",colors=['red','orange','red']));sys.exit()
-elif not share_count:
-	console.print(Gradient("Bobo walang count",colors=['red','orange','red']));sys.exit()
+import sys
+import requests
+import time
+from rich.console import Console
+from rich.panel import Panel
 
-os.system("clear")
-banner()
-headers = {
-	'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
-	'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
-	'sec-ch-ua-mobile': '?0',
-	'sec-ch-ua-platform': "Windows",
-	'sec-fetch-dest': 'document',
-	'sec-fetch-mode': 'navigate',
-	'sec-fetch-site': 'none',
-	'sec-fetch-user': '?1',
-	'upgrade-insecure-requests': '1'
-}
-class Share:
-	async def get_token(self, session):
-		headers['cookie'] = config['cookies']
-		async with session.get('https://business.facebook.com/content_management', headers=headers) as response:
-			data = await response.text()
-			access_token = 'EAAG' + re.search('EAAG(.*?)","', data).group(1)
-			return access_token, headers['cookie']
-	async def share(self, session, token, cookie):
-		headers['cookie']
-		headers['sec-fetch-dest']
-		headers['sec-fetch-mode']
-		headers['sec-fetch-site']
-		headers['sec-fetch-user']
-		headers['upgrade-insecure-requests']
-		headers['accept-encoding'] = 'gzip, deflate'
-		headers['host'] = 'b-graph.facebook.com'
-		headers['cookie'] = cookie
-		count = 1
-		with console.status("[bold green] Sending shares....") as status:
-			while count < share_count + 1:
-				async with session.post(f'https://b-graph.facebook.com/me/feed?link=https://mbasic.facebook.com/{config["post"]}&published=0&access_token={token}', headers=headers) as response:
-					data = await response.json()
-					if 'id' in data:
-						console.log(f"({count}/{share_count}) Complete")
-						count += 1
-					else:
-						console.log("[bold red]Cookie is blocked, ctrl c to exit !!!")
-						console.log(f"[white] Total Success : [bold green]{count}")
-						break
-async def main(num_tasks): 
-	async with aiohttp.ClientSession() as session:
-		share = Share()
-		token, cookie = await share.get_token(session)
-		tasks = []
-		for i in range(num_tasks):
-			task = asyncio.create_task(share.share(session, token, cookie))
-			tasks.append(task)
-		await asyncio.gather(*tasks)
-asyncio.run(main(1))
+# Clear Function
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+# Approval Function (Exact Code as Requested)
+def approval():
+    uuid = str(os.geteuid()) + "DS" + str(os.geteuid())
+    id = "KYZIN-SHARE-TOOL-" + "".join(uuid)
+    clear()
+    print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYou Need Approval To Use This Tool\033[1;37m")
+    print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYour Key :\033[0;31m {id}")
+    time.sleep(0.1)
+    print("\033[0;37m──────────────────────────────────────────────────────────")
+    try:
+        httpCaht = requests.get("https://github.com/Ubermanue/key.txtt/blob/main/key.txt").text
+        if id in httpCaht:
+            print("\033[0;32m >> Your Key Has Been Approved !!!")
+            time.sleep(1)
+        else:
+            print("\033[0;32m >> Send Key on Facebook")
+            time.sleep(0.1)
+            input(" >> Click Enter To Send Your Key ")
+            tks = "Hello%20Sir%20!%20Please%20Approve%20My%20Token%20The%20Token%20Is%20:" + id
+            os.system("xdg-open https://www.facebook.com/kyzinnot?" + tks)
+            approval()
+            time.sleep(1)
+            exit()
+    except:
+        print(" >> Unable To Fetch Data From Server ")
+        time.sleep(2)
+        exit()
+
+approval()
+
+# Admin Panel Style
+def logo_menu():
+    console = Console()
+    banner = Panel(
+        "KYZIN SHARE TOOL FREE\n"
+        "OWNER: KYZIN\n"
+        "TOOL TYPE: AUTO SHARE TOOL\n"
+        "STATUS: PAID USERS ONLY\n",
+        title="KYZIN SHARE TOOL",
+        style="blue"
+    )
+    console.print(banner)
+
+# Auto Share Function
+def bot_share():
+    clear()
+    logo_menu()
+    
+    token = input("Enter your Facebook token: ")
+    link = input("Enter the post link: ")
+    shares = int(input("Enter number of shares: "))
+
+    console = Console()
+    for i in range(shares):
+        try:
+            post = requests.post(f"https://graph.facebook.com/me/feed?link={link}&access_token={token}")
+            if post.status_code == 200:
+                console.print(Panel(f"Shared {i+1}/{shares} - [green]SUCCESS[/green]", title="Share Panel", style="cyan"))
+            else:
+                console.print(Panel("Error in sharing!", title="Error", style="red"))
+        except:
+            console.print(Panel("Connection Error!", title="Error", style="red"))
+        time.sleep(0.02)  # 50 shares per second
+
+bot_share()
