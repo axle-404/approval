@@ -9,8 +9,6 @@ from rich.panel import Panel
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-approval()
-
 # Admin Panel Style
 def logo_menu():
     console = Console()
