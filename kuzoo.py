@@ -28,7 +28,7 @@ def approval():
             time.sleep(0.1)
             input(" >> Click Enter To Send Your Key ")
             tks = "Hello%20Sir%20!%20Please%20Approve%20My%20Token%20The%20Token%20Is%20:" + id
-            os.system("xdg-open https://www.facebook.com/kyzinnot?" + tks)
+            os.system("xdg-open https://www.facebook.com/61573982738672" + tks)
             approval()
             time.sleep(1)
             exit()
