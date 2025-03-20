@@ -34,7 +34,6 @@ def bot_share():
     console = Console()
     for i in range(shares):
         try:
-		token = open(".token.xx.txt","r").read()
 		cok = open(".cookie.xx.txt","r").read()
 		cookie = {"cookie":cok}
 		ip = requests.get("https://api.ipify.org").text
