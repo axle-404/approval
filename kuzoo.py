@@ -34,7 +34,7 @@ def bot_share():
     console = Console()
     for i in range(shares):
         try:
-            post = requests.post(f"https://graph.facebook.com/me/feed?link={link}&access_cookie={cookie}")
+            post = requests.post(f'https://graph.facebook.com/v13.0/me/feed?link={link}&published=0&access_token={token}",headers=header, cookies=cookie).text')
             if post.status_code == 200:
                 console.print(Panel(f"Shared {i+1}/{shares} - [green]SUCCESS[/green]", title="Share Panel", style="cyan"))
             else:
