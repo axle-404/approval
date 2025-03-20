@@ -9,34 +9,6 @@ from rich.panel import Panel
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-# Approval Function (Exact Code as Requested)
-def approval():
-    uuid = str(os.geteuid()) + "DS" + str(os.geteuid())
-    id = "WADE-SHARE-TOOL-" + "".join(uuid)
-    clear()
-    print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYou Need Approval To Use This Tool\033[1;37m")
-    print(f"\033[1;37m[{chr(27)}[36m•] \033[0;32mYour Key :\033[0;31m {id}")
-    time.sleep(0.1)
-    print("\033[0;37m──────────────────────────────────────────────────────────")
-    try:
-        httpCaht = requests.get("https://github.com/axle-404/approval/edit/main/approval").text
-        if id in httpCaht:
-            print("\033[0;32m >> Your Key Has Been Approved !!!")
-            time.sleep(1)
-        else:
-            print("\033[0;32m >> Send Key on Facebook")
-            time.sleep(0.1)
-            input(" >> Click Enter To Send Your Key ")
-            tks = "Hello%20Sir%20!%20Please%20Approve%20My%20Token%20The%20Token%20Is%20:" + id
-            os.system("xdg-open https://www.facebook.com/61573982738672" + tks)
-            approval()
-            time.sleep(1)
-            exit()
-    except:
-        print(" >> Unable To Fetch Data From Server ")
-        time.sleep(2)
-        exit()
-
 approval()
 
 # Admin Panel Style
