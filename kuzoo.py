@@ -19,7 +19,7 @@ def approval():
     time.sleep(0.1)
     print("\033[0;37m──────────────────────────────────────────────────────────")
     try:
-        httpCaht = requests.get("https://github.com/Ubermanue/key.txtt/blob/main/key.txt").text
+        httpCaht = requests.get("https://github.com/axle-404/key.txtt/blob/main/key.txt").text
         if id in httpCaht:
             print("\033[0;32m >> Your Key Has Been Approved !!!")
             time.sleep(1)
